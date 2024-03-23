@@ -1,3 +1,5 @@
+import sys
+sys.path.append("./Backend/Conexion_base_datos")
 from Conexion import *
 
 class Usuario:
