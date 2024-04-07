@@ -41,7 +41,6 @@ class Consulta:
             cursor.execute(consultaSql, valores)
             usuarios = cursor.fetchall()
             conexion.commit()
-            print(usuarios)
             conexion.close()
             return usuarios
             

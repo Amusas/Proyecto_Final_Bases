@@ -1,14 +1,33 @@
-
+import sys
+sys.path.append("./Controller")
+import Login_Controller as lc
 #comando para instalar la libreria: pip install customtkinter
 #se instalan ambas
 import customtkinter as ctk
 import tkinter
 
+#quita el mensaje del label error
+def eliminar_error():
+  labelError.configure(text="")
+
+
 #eventos de botones y funciones
 def iniciar_sesion():
     nombre_usuario = nombre_usuario_input.get()
     contrasenia = contrasena_input.get()
-    """ACA debe estar el llamado a un controlador para validar los datos"""
+    codigoEstado = lc.iniciarSesion(nombre_usuario, contrasenia)
+    
+    if codigoEstado == -1:
+        labelError.configure(text="Algún campo esta vacio.")
+        labelError.place(x=100,y=290)  
+        app.after(1500, eliminar_error)  # 2000 milisegundos = 2 segundos
+    if codigoEstado == 0:
+        labelError.configure(text="Contraseña incorrecta.")
+        labelError.place(x=100,y=290)  
+        app.after(1500, eliminar_error)  # 2000 milisegundos = 2 segundos
+    if codigoEstado == 1:
+        """Aca se cambia al menu principal, el inicio de sesion fue correcto"""
+        
 
 
 #Creacion de la ventana principal
@@ -36,5 +55,7 @@ contrasena_input.place(x=50, y=190)
 
 boton_login = ctk.CTkButton(master=frame, width=260, text="Iniciar Sesion", corner_radius=10, command=iniciar_sesion)
 boton_login.place(x=50, y = 250)
+
+labelError = ctk.CTkLabel(master=frame,text="Ensayar", font=("Century gothic", 13))
 
 app.mainloop()

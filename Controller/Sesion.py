@@ -7,14 +7,14 @@ class Sesion:
 
     __instancia = None
 
-    def __init__(self, usuario, contrasena):
+    def __init__(self, usuario, permisos):
         """
         Constructor privado para evitar la creación de multiples instancias.
         """
         if Sesion.__instancia is not None:
             raise Exception("Ya existe una sesión activa.")
         self.__usuario = usuario
-        self.__contrasena = contrasena
+        self.__permisos = permisos
         Sesion.__instancia = self
 
     @staticmethod
@@ -34,11 +34,11 @@ class Sesion:
         return self.__usuario
 
     @property
-    def contrasena(self):
+    def permisos(self):
         """
-        Propiedad para obtener la contraseña de la sesión actual.
+        Propiedad para obtener los permisos de la sesión actual.
         """
-        return self.__contrasena
+        return self.__permisos
 
     def cerrar_sesion(self):
         """

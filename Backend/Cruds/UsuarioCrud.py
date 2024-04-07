@@ -1,10 +1,8 @@
 import sys
-sys.path.append("./Backend/Conexion_base_datos")#para que el compilador de python encuntre los modulos
 sys.path.append("./Backend/consultas")
-from Conexion import *
 from Consulta import *
 
-class Usuario:
+class UsuarioCrud:
     
     #Metodo para guardar los usuarios en la base de datos
     def ingresarUsuario(codigo, nombreUsario, contrasenia, permisos):
@@ -23,6 +21,12 @@ class Usuario:
     def obtenerUsuario(codigo):
         consultaSql = "SELECT * FROM Proyecto.Usuarios WHERE Usuarios.codigo=%s;"
         valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores     
+        return Consulta.obtenerRegistro(consultaSql, valores)
+    
+    #Funcion para obtener un usuario por su nombre de usuario
+    def obtenerUsuarioxNombre(nombreUsuario):
+        consultaSql = "SELECT * FROM Proyecto.Usuarios WHERE Usuarios.nombre_usuario=%s;"
+        valores = (nombreUsuario,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores     
         return Consulta.obtenerRegistro(consultaSql, valores)
             
     

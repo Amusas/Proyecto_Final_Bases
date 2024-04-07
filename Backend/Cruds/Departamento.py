@@ -1,7 +1,5 @@
 import sys
-sys.path.append("./Backend/Conexion_base_datos")#para que el compilador de python encuntre los modulos
 sys.path.append("./Backend/consultas")
-from Conexion import *
 from Consulta import *
 
 class Departamento:
