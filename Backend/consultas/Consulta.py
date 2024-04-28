@@ -12,9 +12,11 @@ class Consulta:
             conexion.commit()
             print(cursor.rowcount, " registro se ha guardado el registro correctamente")
             conexion.close()
-            
+        except mysql.connector.errors.IntegrityError as error:
+            print(error)
+            return -1 #retorna -1 si hubo un error de integridad(llave primaria repetida)
         except mysql.connector.Error as error:
-            print(f"hubo un error en el guardado de datos {error}")
+            print(f"hubo un error en el guardado de datos {error}") 
             
             
     #Retorna todos los registros de la vase de datos        

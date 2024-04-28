@@ -1,8 +1,8 @@
 import sys
 from datetime import datetime
 sys.path.append("./Backend/Cruds")
-from UsuarioCrud import *
-from BitacoraSesiones import BitacoraSesiones as bs
+import UsuarioCRUD
+import BitacoraSesionesCRUD as bs
 from Sesion import Sesion
 
 
@@ -23,13 +23,12 @@ def validarDatos(nombre_usuario, contrasenia):
 """
 def obtenerUsuario(nombreUsuario):
     usuario = {}
-    usuarioBaseDatos = UsuarioCrud.obtenerUsuarioxNombre(nombreUsuario)   
+    usuarioBaseDatos = UsuarioCRUD.obtenerUsuarioxNombre(nombreUsuario)   
     for atributo in usuarioBaseDatos:
         usuario = {
             "id": atributo[0],
             "nombreUsuario": atributo[1],
             "contrasenia": atributo[2],
-            "permisos": atributo[3]
         }
     return usuario
             
@@ -45,11 +44,13 @@ def iniciarSesion(nombre_usuario, contrasenia):
     if validarDatos(nombre_usuario, contrasenia) == False:
         return -1
     usuario = obtenerUsuario(nombre_usuario)
+    if usuario == {}:
+        return 2
     if contrasenia != usuario["contrasenia"]:
         print(f"Warning: el usuario {nombre_usuario} ingreso mal su contraseña")
         return 0
     #se guarda la sesion hasta salirse de la app
-    Sesion(usuario["nombreUsuario"], usuario["permisos"])
+    Sesion(usuario["nombreUsuario"], "ADMIN")
     bs.ingresarBitacora(usuario["id"], datetime.now())
     return 1
     

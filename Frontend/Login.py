@@ -1,6 +1,7 @@
 import sys
 sys.path.append("./Controller")
 import Login_Controller as lc
+import Sesion 
 #comando para instalar la libreria: pip install customtkinter
 #se instalan ambas
 import customtkinter as ctk
@@ -9,6 +10,11 @@ import tkinter
 #quita el mensaje del label error
 def eliminar_error():
   labelError.configure(text="")
+
+  
+def cerrar():
+    
+    app.destroy()
 
 
 #eventos de botones y funciones
@@ -25,8 +31,12 @@ def iniciar_sesion():
         labelError.configure(text="Contraseña incorrecta.")
         labelError.place(x=100,y=290)  
         app.after(1500, eliminar_error)  # 2000 milisegundos = 2 segundos
+    if codigoEstado == 2:
+        labelError.configure(text="El usuario no existe.")
+        labelError.place(x=100,y=290)  
+        app.after(1500, eliminar_error)
     if codigoEstado == 1:
-        """Aca se cambia al menu principal, el inicio de sesion fue correcto"""
+        print("inicio_sesion")
         
 
 
@@ -38,6 +48,7 @@ app = ctk.CTk()
 app.geometry("480x600")
 app.title("login")
 app.resizable(False, False)
+app.protocol("WM_DELETE_WINDOW", cerrar)
 
 #Creacion de la seccion donde iran los elementos
 frame = ctk.CTkFrame(master=app, width=360, height=400, corner_radius=30)

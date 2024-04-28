@@ -23,11 +23,11 @@ DROP TABLE IF EXISTS `Bitacora_sesiones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Bitacora_sesiones` (
-  `usuario` varchar(20) DEFAULT NULL,
+  `id_usuario` varchar(20) DEFAULT NULL,
   `fecha_entrada` datetime DEFAULT NULL,
   `fecha_salida` datetime DEFAULT NULL,
-  KEY `usuario_idx` (`usuario`),
-  CONSTRAINT `usuario` FOREIGN KEY (`usuario`) REFERENCES `Usuarios` (`codigo`)
+  KEY `usuario_idx` (`id_usuario`),
+  CONSTRAINT `usuario` FOREIGN KEY (`id_usuario`) REFERENCES `Usuarios` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -42,9 +42,27 @@ CREATE TABLE `Cargos` (
   `codigo` varchar(40) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `salario` float DEFAULT NULL,
-  `funciones_asignadas` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Cargos_Funciones_Asignadas`
+--
+
+DROP TABLE IF EXISTS `Cargos_Funciones_Asignadas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Cargos_Funciones_Asignadas` (
+  `codigo` int NOT NULL AUTO_INCREMENT,
+  `id_cargo` varchar(45) DEFAULT NULL,
+  `id_funcion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fk_Cargos_Funciones_Asignadas_1_idx` (`id_cargo`),
+  KEY `fk_Cargos_Funciones_Asignadas_2_idx` (`id_funcion`),
+  CONSTRAINT `fk_Cargos_Funciones_Asignadas_1` FOREIGN KEY (`id_cargo`) REFERENCES `Cargos` (`codigo`),
+  CONSTRAINT `fk_Cargos_Funciones_Asignadas_2` FOREIGN KEY (`id_funcion`) REFERENCES `Funciones_Asignadas` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,18 +74,18 @@ DROP TABLE IF EXISTS `Contratos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Contratos` (
   `codigo` varchar(20) NOT NULL,
-  `empleado` varchar(20) NOT NULL,
-  `cargo` varchar(20) NOT NULL,
-  `sucursal` varchar(20) NOT NULL,
+  `id_empleado` varchar(20) NOT NULL,
+  `id_cargo` varchar(20) NOT NULL,
+  `id_sucursal` varchar(20) NOT NULL,
   `fecha_inicio` datetime NOT NULL,
   `fecha_terminacion` datetime NOT NULL,
   PRIMARY KEY (`codigo`),
-  KEY `empleado_idx` (`empleado`),
-  KEY `cargo_idx` (`cargo`),
-  KEY `sucursal_idx` (`sucursal`),
-  CONSTRAINT `c_cargo` FOREIGN KEY (`cargo`) REFERENCES `Cargos` (`codigo`),
-  CONSTRAINT `c_empleado` FOREIGN KEY (`empleado`) REFERENCES `Empleados` (`codigo`),
-  CONSTRAINT `c_sucursal` FOREIGN KEY (`sucursal`) REFERENCES `Sucursales` (`codigo`)
+  KEY `empleado_idx` (`id_empleado`),
+  KEY `cargo_idx` (`id_cargo`),
+  KEY `sucursal_idx` (`id_sucursal`),
+  CONSTRAINT `c_cargo` FOREIGN KEY (`id_cargo`) REFERENCES `Cargos` (`codigo`),
+  CONSTRAINT `c_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `Empleados` (`codigo`),
+  CONSTRAINT `c_sucursal` FOREIGN KEY (`id_sucursal`) REFERENCES `Sucursales` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,13 +115,27 @@ CREATE TABLE `Empleados` (
   `codigo` varchar(20) NOT NULL,
   `cedula` varchar(20) NOT NULL,
   `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
   `direccion` varchar(100) NOT NULL,
-  `telefono` varchar(45) NOT NULL,
-  `cargo` varchar(20) NOT NULL,
-  `profesion` varchar(50) NOT NULL,
+  `telefono_contacto` varchar(45) NOT NULL,
+  `id_cargo` varchar(20) NOT NULL,
   PRIMARY KEY (`codigo`),
-  KEY `cargo_idx` (`cargo`),
-  CONSTRAINT `cargo` FOREIGN KEY (`cargo`) REFERENCES `Cargos` (`codigo`)
+  KEY `cargo_idx` (`id_cargo`),
+  CONSTRAINT `cargo` FOREIGN KEY (`id_cargo`) REFERENCES `Cargos` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Funciones_Asignadas`
+--
+
+DROP TABLE IF EXISTS `Funciones_Asignadas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Funciones_Asignadas` (
+  `codigo` varchar(20) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -122,7 +154,56 @@ CREATE TABLE `Municipios` (
   `departamento` varchar(40) NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `departamento_idx` (`departamento`),
-  CONSTRAINT `departamento` FOREIGN KEY (`departamento`) REFERENCES `Departamentos` (`codigo`)
+  KEY `fk_Municipios_1_idx` (`tipo_municipio`),
+  CONSTRAINT `departamento` FOREIGN KEY (`departamento`) REFERENCES `Departamentos` (`codigo`),
+  CONSTRAINT `fk_Municipios_1` FOREIGN KEY (`tipo_municipio`) REFERENCES `Tipo_Municipio` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Permisos`
+--
+
+DROP TABLE IF EXISTS `Permisos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Permisos` (
+  `codigo` varchar(45) NOT NULL,
+  `permiso` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Profesion_Empleado`
+--
+
+DROP TABLE IF EXISTS `Profesion_Empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Profesion_Empleado` (
+  `codigo` int NOT NULL AUTO_INCREMENT,
+  `id_empleado` varchar(45) DEFAULT NULL,
+  `id_profesion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `idProfesion_idx` (`id_profesion`),
+  KEY `idEmpleado` (`id_empleado`),
+  CONSTRAINT `idEmpleado` FOREIGN KEY (`id_empleado`) REFERENCES `Empleados` (`codigo`),
+  CONSTRAINT `idProfesion` FOREIGN KEY (`id_profesion`) REFERENCES `Profesiones` (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Profesiones`
+--
+
+DROP TABLE IF EXISTS `Profesiones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Profesiones` (
+  `codigo` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -136,17 +217,31 @@ DROP TABLE IF EXISTS `Sucursales`;
 CREATE TABLE `Sucursales` (
   `codigo` varchar(45) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
-  `departamento` varchar(40) DEFAULT NULL,
-  `municipio` varchar(40) DEFAULT NULL,
-  `director` varchar(40) DEFAULT NULL,
+  `id_departamento` varchar(40) DEFAULT NULL,
+  `id_municipio` varchar(40) DEFAULT NULL,
+  `id_director` varchar(40) DEFAULT NULL,
   `presupuesto_anual` float DEFAULT NULL,
   PRIMARY KEY (`codigo`),
-  KEY `departamento_idx` (`departamento`),
-  KEY `municipio_idx` (`municipio`),
-  KEY `director_idx` (`director`),
-  CONSTRAINT `departamento_sucursal` FOREIGN KEY (`departamento`) REFERENCES `Departamentos` (`codigo`),
-  CONSTRAINT `director` FOREIGN KEY (`director`) REFERENCES `Empleados` (`codigo`),
-  CONSTRAINT `municipio` FOREIGN KEY (`municipio`) REFERENCES `Municipios` (`codigo`)
+  KEY `departamento_idx` (`id_departamento`),
+  KEY `municipio_idx` (`id_municipio`),
+  KEY `director_idx` (`id_director`),
+  CONSTRAINT `departamento_sucursal` FOREIGN KEY (`id_departamento`) REFERENCES `Departamentos` (`codigo`),
+  CONSTRAINT `director` FOREIGN KEY (`id_director`) REFERENCES `Empleados` (`codigo`),
+  CONSTRAINT `municipio` FOREIGN KEY (`id_municipio`) REFERENCES `Municipios` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Tipo_Municipio`
+--
+
+DROP TABLE IF EXISTS `Tipo_Municipio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Tipo_Municipio` (
+  `codigo` varchar(20) NOT NULL,
+  `tipo_municipio` varchar(45) NOT NULL,
+  PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -161,8 +256,10 @@ CREATE TABLE `Usuarios` (
   `codigo` varchar(20) NOT NULL,
   `nombre_usuario` varchar(45) NOT NULL,
   `contrasenia` varchar(45) NOT NULL,
-  `nivel_permisos` varchar(45) NOT NULL,
-  PRIMARY KEY (`codigo`)
+  `id_permiso` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  KEY `fk_Usuarios_1_idx` (`id_permiso`),
+  CONSTRAINT `fk_Usuarios_1` FOREIGN KEY (`id_permiso`) REFERENCES `Permisos` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -175,4 +272,4 @@ CREATE TABLE `Usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-07 15:39:01
+-- Dump completed on 2024-04-28 12:58:28
