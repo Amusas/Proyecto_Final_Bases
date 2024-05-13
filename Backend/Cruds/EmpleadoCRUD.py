@@ -65,10 +65,13 @@ def eliminarEmpleado(codigo):
     consultaSql = "DELETE FROM Proyecto.Empleados WHERE Empleados.codigo=%s;"# %s hace referencia a que son parametros
     valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores   
     #eliminar las filas en Profesion_Empleado que hacen referencia al idEmpleado
-    Consulta.eliminarRegistro("DELETE FROM Proyecto.Profesion_Empleado WHERE Profesion_Empleado.id_empleado = %s", (codigo,))   
+    dejarNuloReferencia(codigo)
     Consulta.eliminarRegistro(consultaSql, valores)
 
 
-modificarEmpleado('10', '6543', 'Camilo', 'Bedoya', 'ghfds', '12344', '01', ['01','02'], [4,5] )
+def dejarNuloReferencia(codigo):
+    Consulta.eliminarRegistro("UPDATE Proyecto.Sucursales SET Sucursales.id_director = %s WHERE Sucursales.id_director = %s", (None,codigo))   
+    Consulta.eliminarRegistro("DELETE FROM Proyecto.Profesion_Empleado WHERE Profesion_Empleado.id_empleado=%s", (codigo,))   
+    Consulta.eliminarRegistro("DELETE FROM Proyecto.Contratos WHERE Contratos.id_empleado=%s", (codigo,))   
 
-    
+

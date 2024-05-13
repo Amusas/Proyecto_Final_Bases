@@ -29,6 +29,7 @@ def obtenerUsuario(nombreUsuario):
             "id": atributo[0],
             "nombreUsuario": atributo[1],
             "contrasenia": atributo[2],
+            "permiso": atributo[3]
         }
     return usuario
             
@@ -50,9 +51,16 @@ def iniciarSesion(nombre_usuario, contrasenia):
         print(f"Warning: el usuario {nombre_usuario} ingreso mal su contraseña")
         return 0
     #se guarda la sesion hasta salirse de la app
-    Sesion(usuario["nombreUsuario"], "ADMIN")
+    Sesion(usuario["id"], usuario["nombreUsuario"], usuario["permiso"])
     bs.ingresarBitacora(usuario["id"], datetime.now())
     return 1
+
+
+def cerrarSesion():
+    sesion = Sesion.obtener_instancia()
+    sesion.cerrar_sesion()
+    bs.fechaSalidaBitacora(datetime.now(), sesion.codigo)
+    print("Cerrando sesion.....")
     
     
     

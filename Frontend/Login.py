@@ -13,7 +13,7 @@ def eliminar_error():
 
   
 def cerrar():
-    
+    lc.cerrarSesion()
     app.destroy()
 
 

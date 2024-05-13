@@ -1,7 +1,7 @@
-Agregar nuevas tuplas de relaciones de muchos a muchos
-
-dejar nulo o con valor predeterminado las referncias de las tuplas eliminadas
+mirar si los cargos se eliminan, dejar nulo si se elimina una funcion o una profesion
 
 Cerrar sesion con la bitacora
+
+cambiar bitacora de sesion agregando hora de entrada y de salida
 
 

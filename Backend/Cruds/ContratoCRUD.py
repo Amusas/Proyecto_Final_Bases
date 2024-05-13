@@ -1,6 +1,7 @@
 import sys
 sys.path.append("./Backend/consultas")
 from Consulta import *
+import datetime
 
     
 #las fechas se tienen que enviar como tipo datetime
@@ -48,4 +49,4 @@ def eliminarContrato(codigo):
     valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores     
     Consulta.eliminarRegistro(consultaSql, valores)
         
-     
+        

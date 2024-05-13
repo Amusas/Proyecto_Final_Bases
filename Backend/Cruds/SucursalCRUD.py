@@ -39,8 +39,9 @@ def modificarSucursal(codigo, nombre, departamento, municipio, director, presupu
 #Funcion para eliminar la sucursal por su codigo
 def eliminarSucursal(codigo):
     consultaSql = "DELETE FROM Proyecto.Sucursales WHERE Sucursales.codigo=%s;"# %s hace referencia a que son parametros
-    valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores     
+    valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores   
+    Consulta.eliminarRegistro("UPDATE Proyecto.Contratos SET Contratos.id_sucursal WHERE id_sucursal=%s", (None, codigo))  
     Consulta.eliminarRegistro(consultaSql, valores)
        
-           
+       
     

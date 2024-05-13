@@ -44,9 +44,10 @@ def modificarUsuario(codigo, nombreUsario, contrasenia, permisos):
         
 #Funcion para eliminar el usuario por su codigo
 def eliminarUsuario(codigo):
-    consultaSql = "DELETE FROM Proyecto.Usuarios WHERE Usuarios.codigo=%s;"# %s hace referencia a que son parametros
     valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores    
-    Consulta.eliminarRegistro("DELETE FROM Proyecto.Bitacora_sesiones WHERE Bitacora_sesiones.id_usuario=%s;", (codigo,))
+    consultaSql = "DELETE FROM Proyecto.Usuarios WHERE Usuarios.codigo=%s;"# %s hace referencia a que son parametros
+    Consulta.eliminarRegistro("DELETE FROM Proyecto.Bitacora_sesiones WHERE Bitacora_sesiones.id_usuario=%s;", valores)
     Consulta.eliminarRegistro(consultaSql, valores)
-   
+    
+  
    
