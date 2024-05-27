@@ -100,26 +100,6 @@ canvas.create_rectangle(
     fill="#6CD4A8",
     outline="")
 
-tabla = ttk.Treeview(window)
-tabla['columns'] = ('Columna 1', 'Columna 2', 'Columna 3')
-
-# Configurar las columnas
-tabla.column('#0', width=100)
-tabla.column('Columna 1', width=100)
-tabla.column('Columna 2', width=100)
-tabla.column('Columna 3', width=100)
-
-# Agregar encabezados
-tabla.heading('#0', text='ID')
-tabla.heading('Columna 1', text='Dato 1')
-tabla.heading('Columna 2', text='Dato 2')
-tabla.heading('Columna 3', text='Dato 3')
-
-# Agregar datos a la tabla
-tabla.insert('', 'end', text='1', values=('Valor 1', 'Valor 2', 'Valor 3'))
-tabla.insert('', 'end', text='2', values=('Valor 4', 'Valor 5', 'Valor 6'))
-tabla.insert('', 'end', text='3', values=('Valor 7', 'Valor 8', 'Valor 9'))
-
 canvas.create_text(
     401.0,
     259.0,
