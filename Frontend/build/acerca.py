@@ -53,14 +53,14 @@ canvas.create_rectangle(
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
-button_1 = Button(
+btnHome = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
-button_1.place(
+btnHome.place(
     x=69.96249389648438,
     y=0.0,
     width=68.03759765625,
@@ -77,14 +77,14 @@ canvas.create_rectangle(
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
-button_2 = Button(
+btnAtras = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
+btnAtras.place(
     x=0.0,
     y=0.0,
     width=67.55000305175781,

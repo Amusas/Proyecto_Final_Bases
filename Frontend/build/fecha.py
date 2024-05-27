@@ -53,14 +53,14 @@ canvas.create_rectangle(
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
-button_1 = Button(
+btnHome = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
-button_1.place(
+btnHome.place(
     x=70.83251953125,
     y=0.0,
     width=68.38999938964844,
@@ -69,14 +69,14 @@ button_1.place(
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
-button_2 = Button(
+btnAtras = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
+btnAtras.place(
     x=0.0,
     y=0.0,
     width=69.0,
@@ -111,14 +111,14 @@ canvas.create_text(
 
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
-button_3 = Button(
+btnUsuarios = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_3 clicked"),
     relief="flat"
 )
-button_3.place(
+btnUsuarios.place(
     x=263.0,
     y=5.0,
     width=166.0,
@@ -127,14 +127,14 @@ button_3.place(
 
 button_image_4 = PhotoImage(
     file=relative_to_assets("button_4.png"))
-button_4 = Button(
+btnFecha = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_4 clicked"),
     relief="flat"
 )
-button_4.place(
+btnFecha.place(
     x=430.0,
     y=5.0,
     width=117.0,

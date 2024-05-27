@@ -54,14 +54,14 @@ canvas.create_text(
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
-button_1 = Button(
+btnEntidades = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
-button_1.place(
+btnEntidades.place(
     x=204.85430908203125,
     y=111.4852294921875,
     width=556.53173828125,
@@ -70,14 +70,14 @@ button_1.place(
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
-button_2 = Button(
+btnAyuda = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
+btnAyuda.place(
     x=203.0,
     y=442.4852294921875,
     width=557.0616455078125,
@@ -86,14 +86,14 @@ button_2.place(
 
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
-button_3 = Button(
+btnUtilidades = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_3 clicked"),
     relief="flat"
 )
-button_3.place(
+btnUtilidades.place(
     x=205.0,
     y=362.4852294921875,
     width=556.53173828125,
@@ -102,14 +102,14 @@ button_3.place(
 
 button_image_4 = PhotoImage(
     file=relative_to_assets("button_4.png"))
-button_4 = Button(
+btnConsultas = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_4 clicked"),
     relief="flat"
 )
-button_4.place(
+btnConsultas.place(
     x=205.0,
     y=281.4852294921875,
     width=556.53173828125,
@@ -118,14 +118,14 @@ button_4.place(
 
 button_image_5 = PhotoImage(
     file=relative_to_assets("button_5.png"))
-button_5 = Button(
+btnTransacciones = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_5 clicked"),
     relief="flat"
 )
-button_5.place(
+btnTransacciones.place(
     x=205.0,
     y=197.4852294921875,
     width=557.0,
@@ -142,14 +142,14 @@ canvas.create_rectangle(
 
 button_image_6 = PhotoImage(
     file=relative_to_assets("button_6.png"))
-button_6 = Button(
+btnAcerca = Button(
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_6 clicked"),
     relief="flat"
 )
-button_6.place(
+btnAcerca.place(
     x=203.0,
     y=519.4852294921875,
     width=557.0616455078125,

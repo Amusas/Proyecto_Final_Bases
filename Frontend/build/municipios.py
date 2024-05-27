@@ -11,7 +11,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\LENOVO\Jeremias\Universidad\6_Semestre\BasesDatos\proyectoFinal\Proyecto_Final_Bases\Frontend\build\assets\frame6")
+ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\LENOVO\Jeremias\Universidad\6_Semestre\BasesDatos\proyectoFinal\Proyecto_Final_Bases\Frontend\build\assets\frame9")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -53,15 +53,15 @@ canvas.create_rectangle(
 
 button_image_1 = PhotoImage(
     file=relative_to_assets("button_1.png"))
-button_1 = Button(
+btnHome = Button(
     image=button_image_1,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_1 clicked"),
     relief="flat"
 )
-button_1.place(
-    x=70.83255004882812,
+btnHome.place(
+    x=70.83251953125,
     y=0.0,
     width=68.38999938964844,
     height=58.619998931884766
@@ -69,14 +69,14 @@ button_1.place(
 
 button_image_2 = PhotoImage(
     file=relative_to_assets("button_2.png"))
-button_2 = Button(
+btnAtras = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_2 clicked"),
     relief="flat"
 )
-button_2.place(
+btnAtras.place(
     x=0.0,
     y=0.0,
     width=69.0,
@@ -84,9 +84,9 @@ button_2.place(
 )
 
 canvas.create_rectangle(
-    34.195037841796875,
+    34.195068359375,
     92.81494140625,
-    928.1500549316406,
+    928.1500854492188,
     503.1549377441406,
     fill="#6CD4A8",
     outline="")
@@ -95,7 +95,7 @@ entry_image_1 = PhotoImage(
     file=relative_to_assets("entry_1.png"))
 entry_bg_1 = canvas.create_image(
     501.8687438964844,
-    337.20375061035156,
+    402.20375061035156,
     image=entry_image_1
 )
 entry_1 = Entry(
@@ -106,7 +106,7 @@ entry_1 = Entry(
 )
 entry_1.place(
     x=337.0,
-    y=314.0,
+    y=379.0,
     width=329.73748779296875,
     height=44.407501220703125
 )
@@ -114,8 +114,8 @@ entry_1.place(
 entry_image_2 = PhotoImage(
     file=relative_to_assets("entry_2.png"))
 entry_bg_2 = canvas.create_image(
-    501.9335632324219,
-    267.45375061035156,
+    501.8687438964844,
+    337.20375061035156,
     image=entry_image_2
 )
 entry_2 = Entry(
@@ -125,6 +125,26 @@ entry_2 = Entry(
     highlightthickness=0
 )
 entry_2.place(
+    x=337.0,
+    y=314.0,
+    width=329.73748779296875,
+    height=44.407501220703125
+)
+
+entry_image_3 = PhotoImage(
+    file=relative_to_assets("entry_3.png"))
+entry_bg_3 = canvas.create_image(
+    501.9335632324219,
+    267.45375061035156,
+    image=entry_image_3
+)
+entry_3 = Entry(
+    bd=0,
+    bg="#73F7C0",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_3.place(
     x=337.0648193359375,
     y=244.25,
     width=329.73748779296875,
@@ -132,8 +152,8 @@ entry_2.place(
 )
 
 canvas.create_text(
-    105.027587890625,
-    312.6400146484375,
+    105.0,
+    250.0,
     anchor="nw",
     text="Poblacion:",
     fill="#FFFFFF",
@@ -149,20 +169,20 @@ canvas.create_text(
     font=("MontserratAlternates Bold", 24 * -1)
 )
 
-entry_image_3 = PhotoImage(
-    file=relative_to_assets("entry_3.png"))
-entry_bg_3 = canvas.create_image(
+entry_image_4 = PhotoImage(
+    file=relative_to_assets("entry_4.png"))
+entry_bg_4 = canvas.create_image(
     501.9335632324219,
     134.33748054504395,
-    image=entry_image_3
+    image=entry_image_4
 )
-entry_3 = Entry(
+entry_4 = Entry(
     bd=0,
     bg="#73F7C0",
     fg="#000716",
     highlightthickness=0
 )
-entry_3.place(
+entry_4.place(
     x=337.0648193359375,
     y=112.35498046875,
     width=329.73748779296875,
@@ -179,39 +199,28 @@ canvas.create_text(
 )
 
 canvas.create_text(
-    105.027587890625,
-    249.135009765625,
+    105.0,
+    385.0,
     anchor="nw",
-    text="Salario:",
+    text="Tipo Municipio:",
     fill="#FFFFFF",
     font=("MontserratAlternates Bold", 24 * -1)
 )
 
-entry_image_4 = PhotoImage(
-    file=relative_to_assets("entry_4.png"))
-entry_bg_4 = canvas.create_image(
-    501.9335632324219,
-    267.45375061035156,
-    image=entry_image_4
-)
-entry_4 = Entry(
-    bd=0,
-    bg="#73F7C0",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_4.place(
-    x=337.0648193359375,
-    y=244.25,
-    width=329.73748779296875,
-    height=44.407501220703125
+canvas.create_text(
+    105.0,
+    322.0,
+    anchor="nw",
+    text="Departamento:\n",
+    fill="#FFFFFF",
+    font=("MontserratAlternates Bold", 24 * -1)
 )
 
 entry_image_5 = PhotoImage(
     file=relative_to_assets("entry_5.png"))
 entry_bg_5 = canvas.create_image(
     501.9335632324219,
-    201.50624084472656,
+    267.45375061035156,
     image=entry_image_5
 )
 entry_5 = Entry(
@@ -222,6 +231,26 @@ entry_5 = Entry(
 )
 entry_5.place(
     x=337.0648193359375,
+    y=244.25,
+    width=329.73748779296875,
+    height=44.407501220703125
+)
+
+entry_image_6 = PhotoImage(
+    file=relative_to_assets("entry_6.png"))
+entry_bg_6 = canvas.create_image(
+    501.9335632324219,
+    201.50624084472656,
+    image=entry_image_6
+)
+entry_6 = Entry(
+    bd=0,
+    bg="#73F7C0",
+    fg="#000716",
+    highlightthickness=0
+)
+entry_6.place(
+    x=337.0648193359375,
     y=178.302490234375,
     width=329.73748779296875,
     height=44.407501220703125
@@ -229,14 +258,14 @@ entry_5.place(
 
 button_image_3 = PhotoImage(
     file=relative_to_assets("button_3.png"))
-button_3 = Button(
+btnEliminar = Button(
     image=button_image_3,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_3 clicked"),
     relief="flat"
 )
-button_3.place(
+btnEliminar.place(
     x=718.0,
     y=371.0,
     width=176.1521759033203,
@@ -245,14 +274,14 @@ button_3.place(
 
 button_image_4 = PhotoImage(
     file=relative_to_assets("button_4.png"))
-button_4 = Button(
+btnActualizar = Button(
     image=button_image_4,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_4 clicked"),
     relief="flat"
 )
-button_4.place(
+btnActualizar.place(
     x=718.0,
     y=308.0,
     width=176.1521759033203,
@@ -261,14 +290,14 @@ button_4.place(
 
 button_image_5 = PhotoImage(
     file=relative_to_assets("button_5.png"))
-button_5 = Button(
+btnBuscar = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_5 clicked"),
     relief="flat"
 )
-button_5.place(
+btnBuscar.place(
     x=718.0,
     y=182.978271484375,
     width=176.1521759033203,
@@ -277,14 +306,14 @@ button_5.place(
 
 button_image_6 = PhotoImage(
     file=relative_to_assets("button_6.png"))
-button_6 = Button(
+btnAgregar = Button(
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_6 clicked"),
     relief="flat"
 )
-button_6.place(
+btnAgregar.place(
     x=720.0,
     y=245.7174072265625,
     width=176.5652618408203,
@@ -293,14 +322,14 @@ button_6.place(
 
 button_image_7 = PhotoImage(
     file=relative_to_assets("button_7.png"))
-button_7 = Button(
+btnDepartamento = Button(
     image=button_image_7,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_7 clicked"),
     relief="flat"
 )
-button_7.place(
+btnDepartamento.place(
     x=263.0,
     y=5.0,
     width=166.0,
@@ -309,14 +338,14 @@ button_7.place(
 
 button_image_8 = PhotoImage(
     file=relative_to_assets("button_8.png"))
-button_8 = Button(
+btnMunicipios = Button(
     image=button_image_8,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_8 clicked"),
     relief="flat"
 )
-button_8.place(
+btnMunicipios.place(
     x=430.0,
     y=5.0,
     width=117.0,
@@ -325,14 +354,14 @@ button_8.place(
 
 button_image_9 = PhotoImage(
     file=relative_to_assets("button_9.png"))
-button_9 = Button(
+btnSucursales = Button(
     image=button_image_9,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_9 clicked"),
     relief="flat"
 )
-button_9.place(
+btnSucursales.place(
     x=548.0,
     y=5.0,
     width=114.0,
@@ -341,14 +370,14 @@ button_9.place(
 
 button_image_10 = PhotoImage(
     file=relative_to_assets("button_10.png"))
-button_10 = Button(
+btnProfesiones = Button(
     image=button_image_10,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_10 clicked"),
     relief="flat"
 )
-button_10.place(
+btnProfesiones.place(
     x=737.0,
     y=5.0,
     width=118.0,
@@ -357,14 +386,14 @@ button_10.place(
 
 button_image_11 = PhotoImage(
     file=relative_to_assets("button_11.png"))
-button_11 = Button(
+btnEmpleado = Button(
     image=button_image_11,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_11 clicked"),
     relief="flat"
 )
-button_11.place(
+btnEmpleado.place(
     x=856.0,
     y=5.0,
     width=121.0,
@@ -373,14 +402,14 @@ button_11.place(
 
 button_image_12 = PhotoImage(
     file=relative_to_assets("button_12.png"))
-button_12 = Button(
+btnCargos = Button(
     image=button_image_12,
     borderwidth=0,
     highlightthickness=0,
     command=lambda: print("button_12 clicked"),
     relief="flat"
 )
-button_12.place(
+btnCargos.place(
     x=663.0,
     y=5.0,
     width=73.0,
