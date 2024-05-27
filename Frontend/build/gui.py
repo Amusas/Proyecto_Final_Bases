@@ -11,7 +11,7 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\LENOVO\Jeremias\Universidad\6_Semestre\BasesDatos\proyectoFinal\Proyecto_Final_Bases\Frontend\build\assets\frame0")
 
 
 def relative_to_assets(path: str) -> Path:
@@ -63,7 +63,7 @@ button_1 = Button(
 )
 button_1.place(
     x=204.85430908203125,
-    y=153.4852294921875,
+    y=111.4852294921875,
     width=556.53173828125,
     height=57.133949279785156
 )
@@ -79,7 +79,7 @@ button_2 = Button(
 )
 button_2.place(
     x=203.0,
-    y=484.4852294921875,
+    y=442.4852294921875,
     width=557.0616455078125,
     height=57.55206298828125
 )
@@ -95,7 +95,7 @@ button_3 = Button(
 )
 button_3.place(
     x=205.0,
-    y=404.4852294921875,
+    y=362.4852294921875,
     width=556.53173828125,
     height=57.06479263305664
 )
@@ -111,7 +111,7 @@ button_4 = Button(
 )
 button_4.place(
     x=205.0,
-    y=323.4852294921875,
+    y=281.4852294921875,
     width=556.53173828125,
     height=58.0
 )
@@ -127,7 +127,7 @@ button_5 = Button(
 )
 button_5.place(
     x=205.0,
-    y=239.4852294921875,
+    y=197.4852294921875,
     width=557.0,
     height=56.81453323364258
 )
@@ -139,5 +139,21 @@ canvas.create_rectangle(
     99.22882080078125,
     fill="#9F70DA",
     outline="")
+
+button_image_6 = PhotoImage(
+    file=relative_to_assets("button_6.png"))
+button_6 = Button(
+    image=button_image_6,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("button_6 clicked"),
+    relief="flat"
+)
+button_6.place(
+    x=203.0,
+    y=519.4852294921875,
+    width=557.0616455078125,
+    height=57.55206298828125
+)
 window.resizable(False, False)
 window.mainloop()
