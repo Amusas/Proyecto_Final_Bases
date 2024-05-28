@@ -4,28 +4,73 @@
 
 
 from pathlib import Path
-
+import sys
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
-import build.home
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, messagebox
+sys.path.append("./Frontend")
+sys.path.append("./Controller")
+import Menu_Controller as mc
+import build.home as home
+import build.contrato as contrato
+import build.ayuda as ayuda
+import build.acerca as acerca
+import Login_Controller as lc
+import build.Consultas_Admin as consultasA
+import build.Consultas_Esporadico as consultaE
+import build.consultas_Chichipato as consultaC
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"assets\frame0")
-window = Tk()
+ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
 
+def cerrar(app):
+    try:
+        lc.cerrarSesion()
+        app.destroy()
+    except:
+        app.destroy()  
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def iniciarEntitdadesGui():
+def iniciarEntitdadesGui(window):
+    if mc.comprobar_Permisos_General():
+        window.destroy()
+        home.iniciar()
+    else:
+        messagebox.showwarning("Permisos insuficientes", "No tienes permisos suficientes para realizar esta acción.")
+
+
+def iniciarTransaccionesContrato(window):
+    if mc.comprobar_Permisos_General():
+        window.destroy()
+        contrato.iniciar()
+    else:
+        messagebox.showwarning("Permisos insuficientes", "No tienes permisos suficientes para realizar esta acción.")
+
+def iniciarAyudaGui(window):
     window.destroy()
-    home.iniciar()
+    ayuda.iniciar()
+    
+def iniciarAcercaGui(window):
+    window.destroy()
+    acerca.iniciar()
+    
+def iniciarConsultasGui(window):
+    window.destroy()
+    if mc.comprobar_Permisos() == 3:
+        consultaC.iniciar()
+    elif mc.comprobar_Permisos() == 2:
+        consultaE.iniciar()
+    else:
+        consultasA.iniciar()
 
 
 def iniciar():
 
+    window = Tk()
+    window.protocol("WM_DELETE_WINDOW", lambda: cerrar(window))
     window.geometry("965x611")
     window.configure(bg = "#BBF3DB")
 
@@ -64,7 +109,7 @@ def iniciar():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: iniciarEntitdadesGui(),
+        command=lambda: iniciarEntitdadesGui(window),
         relief="flat"
     )
     btnEntidades.place(
@@ -80,7 +125,7 @@ def iniciar():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: iniciarAyudaGui(window),
         relief="flat"
     )
     btnAyuda.place(
@@ -112,7 +157,7 @@ def iniciar():
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
+        command=lambda: iniciarConsultasGui(window),
         relief="flat"
     )
     btnConsultas.place(
@@ -128,7 +173,7 @@ def iniciar():
         image=button_image_5,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_5 clicked"),
+        command=lambda: iniciarTransaccionesContrato(window),
         relief="flat"
     )
     btnTransacciones.place(
@@ -152,7 +197,7 @@ def iniciar():
         image=button_image_6,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_6 clicked"),
+        command=lambda: iniciarAcercaGui(window),
         relief="flat"
     )
     btnAcerca.place(
@@ -163,4 +208,3 @@ def iniciar():
     )
     window.resizable(False, False)
     window.mainloop()
-    

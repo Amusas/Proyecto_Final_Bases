@@ -27,7 +27,6 @@ class Consulta:
             cursor.execute(consulta)
             usuarios = cursor.fetchall()
             conexion.commit()
-            print(usuarios)
             conexion.close()
             return usuarios
             
@@ -61,6 +60,19 @@ class Consulta:
             
         except mysql.connector.Error as error:
             print(f"hubo un error actualizando los datos: {error}")
+        
+        
+    def ejecutar(consultaSql):
+        try:
+            conexion = Conexion.conexionBaseDatos()
+            cursor = conexion.cursor() # Ejecuta las consultas en la base de datos
+            cursor.execute(consultaSql)
+            conexion.commit()
+        except mysql.connector.Error as error:
+            print(f"hubo un error ejecutando la consulta: {error}")
+        finally:
+            cursor.close()
+            conexion.close()
 
 
     def eliminarRegistro(consultaSql, valores):

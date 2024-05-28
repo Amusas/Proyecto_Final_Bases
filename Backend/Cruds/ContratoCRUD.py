@@ -1,15 +1,13 @@
 import sys
 sys.path.append("./Backend/consultas")
 from Consulta import *
-import datetime
 
     
 #las fechas se tienen que enviar como tipo datetime
 #Metodo para guardar los contratos en la base de datos
-def ingresarContrato(codigo, empleado, sucursal, fecha_inicio, fecha_terminacion):
-    cargo = obtenerCargo(empleado)
+def ingresarContrato(codigo, empleado, sucursal, cargo, fecha_inicio, fecha_terminacion):
     consultaSql = "INSERT INTO Proyecto.Contratos VALUES(%s,%s,%s,%s,%s,%s);"# %s hace referencia a que son parametros
-    valores = (codigo, empleado, cargo[0][0], sucursal, fecha_inicio, fecha_terminacion) #los valores tienen que estar en una tupla
+    valores = (codigo, empleado, sucursal, cargo, fecha_inicio, fecha_terminacion) #los valores tienen que estar en una tupla
     Consulta.agregarRegistro(consultaSql, valores)
         
         
@@ -31,7 +29,7 @@ def obtenerCargo(empleado):
         "SELECT id_cargo FROM Proyecto.Empleados WHERE Empleados.codigo=%s;", (empleado,))
     
 #Funcion para modificar un contrato
-def modificarContrato(codigo, empleado, sucursal, fecha_inicio, fecha_terminacion):
+def modificarContrato(codigo, empleado, cargo, sucursal, fecha_inicio, fecha_terminacion):
     consultaSql = ("UPDATE Proyecto.Contratos "
            "SET Contratos.id_empleado = %s, "
            "Contratos.id_cargo = %s, "

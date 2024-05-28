@@ -4,11 +4,10 @@ import CargoCRUD as crud
 
 
 def registrarCargo(codigo, nombre, salario, funciones):
-    ingresarCargo(codigo, nombre, salario, funciones)
-
+    crud.ingresarCargo(codigo, nombre, salario, funciones)
 
 def buscarCargo(codigo):
-    return obtenerCargo(codigo)
+    return crud.obtenerCargo(codigo)
 
 def eliminarCargo(codigo):
     crud.eliminarCargo(codigo)

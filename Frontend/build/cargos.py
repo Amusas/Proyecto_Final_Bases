@@ -11,22 +11,39 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, END
 
 sys.path.append("./Controller")
 import Cargo_Controller as cc
+sys.path.append("./Frontend")
+import build.municipios as municipio
+import build.departamento as departamento
+import build.profesiones as profesion
+import build.empleado as cargos
+import build.sucursales as sucursal
+import build.home as home
+import build.menu as menu
+import Login_Controller as lc
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame5")
 
+def cerrar(app):
+    try:
+        lc.cerrarSesion()
+        app.destroy()
+    except:
+        app.destroy()  
+
 def registrarCargo(codigo, nombre, salario, funciones):
-    cc.registrarCargo(codigo, nombre, salario, funciones)
+    funciones_asignadas = [funciones]
+    cc.registrarCargo(codigo, nombre, salario, funciones_asignadas)
 
 def buscarCargo(codigo, nombre, salario, funciones):
-    cargo=cc.buscarCargo(codigo)
-    nombre.delete(0,END)    
-    salario.delete(0,END)
-    funciones.delete(0,END)
+    cargo, funciones_asig = cc.buscarCargo(codigo)
+    nombre.delete(0, END)    
+    salario.delete(0, END)
+    funciones.delete(0, END)
 
     nombre.insert(0, cargo[0][1])
     salario.insert(0, cargo[0][2])
-    funciones.insert(0, cargo[0][3])
+    funciones.insert(0, funciones_asig[0][1])
 
 
 def actualizarCargo(codigo, nombre, salario, funciones):
@@ -38,9 +55,37 @@ def eliminarCargo(codigo):
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def iniciarMunicipioGui(window):
+    window.destroy()
+    municipio.iniciar()
+    
+def iniciarDepartamentoGui(window):
+    window.destroy()
+    departamento.iniciar()
+    
+def iniciarProfesionGui(window):
+    window.destroy()
+    profesion.iniciar()
+    
+def iniciarEmpleadoGui(window):
+    window.destroy()
+    cargos.iniciar()
+    
+def iniciarSucursalGui(window):
+    window.destroy()
+    sucursal.iniciar()
+
+def iniciarHomeGui(window):
+    window.destroy()
+    home.iniciar()
+
+def iniciarMenu(window):
+    window.destroy()
+    menu.iniciar()
+
 def iniciar():
     window = Tk()
-
+    window.protocol("WM_DELETE_WINDOW", lambda: cerrar(window))
     window.geometry("977x561")
     window.configure(bg = "#FFFFFF")
 
@@ -78,7 +123,7 @@ def iniciar():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=lambda: iniciarMenu(window),
         relief="flat"
     )
     btnHome.place(
@@ -94,7 +139,7 @@ def iniciar():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=lambda: iniciarHomeGui(window),
         relief="flat"
     )
     btnAtras.place(
@@ -116,7 +161,7 @@ def iniciar():
         105.027587890625,
         312.6400146484375,
         anchor="nw",
-        text="Funciones\nasignadas:",
+        text="Funciones/asignadas:",
         fill="#FFFFFF",
         font=("MontserratAlternates Bold", 24 * -1)
     )
@@ -128,7 +173,7 @@ def iniciar():
         388.35750579833984,
         image=entry_image_1
     )
-    funcionesAsignadas = Text(
+    funcionesAsignadas = Entry(
         bd=0,
         bg="#73F7C0",
         fg="#000716",
@@ -283,7 +328,7 @@ def iniciar():
         image=button_image_6,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: registrarCargo(codigo.get(), nombre.get(), int(salario.get()), funcionesAsignadas.get()),
+        command=lambda: registrarCargo(codigo.get(), nombre.get(), float(salario.get()), funcionesAsignadas.get()),
         relief="flat"
     )
 
@@ -300,7 +345,7 @@ def iniciar():
         image=button_image_7,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_7 clicked"),
+        command=lambda: iniciarDepartamentoGui(window),
         relief="flat"
     )
     btnDepartamento.place(
@@ -316,7 +361,7 @@ def iniciar():
         image=button_image_8,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_8 clicked"),
+        command=lambda: iniciarMunicipioGui(window),
         relief="flat"
     )
     btnMunicipio.place(
@@ -332,7 +377,7 @@ def iniciar():
         image=button_image_9,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_9 clicked"),
+        command=lambda: iniciarSucursalGui(window),
         relief="flat"
     )
     btnSucursales.place(
@@ -348,7 +393,7 @@ def iniciar():
         image=button_image_10,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_10 clicked"),
+        command=lambda: iniciarProfesionGui(window),
         relief="flat"
     )
     btnProfesiones.place(
@@ -364,7 +409,7 @@ def iniciar():
         image=button_image_11,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_11 clicked"),
+        command=lambda: iniciarEmpleadoGui(window),
         relief="flat"
     )
     btnEmpleados.place(
@@ -391,5 +436,3 @@ def iniciar():
     )
     window.resizable(False, False)
     window.mainloop()
-
-iniciar()

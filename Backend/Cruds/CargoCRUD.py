@@ -6,7 +6,7 @@ from Consulta import *
 #metodo para la relacion muchos a muchos de Cargos y sus funciones
 def ingresarFunciones(codigo, funciones):
     #Asignacion de profesion al Empleado
-    consultaSql = "INSERT INTO Proyecto.Cargos_Funciones_Asignadas (id_cargo, id_funciones) VALUES (%s, %s)"
+    consultaSql = "INSERT INTO Proyecto.Cargos_Funciones_Asignadas (id_cargo, id_funcion) VALUES (%s, %s)"
     for funcion in funciones:
         valores = (codigo, funcion)
         Consulta.agregarRegistro(consultaSql, valores)
@@ -31,8 +31,9 @@ def obtenerCargos():
 #Funcion para obtener un cargo por su id
 def obtenerCargo(codigo):
     consultaSql = "SELECT * FROM Proyecto.Cargos WHERE Cargos.codigo=%s;"
+    consultaSql2 = "SELECT * FROM Proyecto.Cargos_Funciones_Asignadas WHERE Cargos_Funciones_Asignadas.id_cargo=%s"
     valores = (codigo,) #se agrega la ',' para que python reconozca que es una tupla y no genere errores     
-    return Consulta.obtenerRegistro(consultaSql, valores)
+    return Consulta.obtenerRegistro(consultaSql, valores), Consulta.obtenerRegistro(consultaSql2, valores)
    
 
 #modifica las funciones de la tabla muchos a muchos
