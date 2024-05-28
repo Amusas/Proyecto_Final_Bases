@@ -8,7 +8,7 @@ class Conexion:
             #cambiar el usuario y la contraseña si es necesario
             conexion = mysql.connector.connect(user='root',
                                                host='127.0.0.1',#referencia a localHost 
-                                               password='12345', 
+                                               password='1234', 
                                                database='Proyecto', 
                                                port='3306')
             print("conexion establecida correctamente")

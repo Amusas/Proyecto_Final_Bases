@@ -10,7 +10,7 @@ def ingresarProfesion(codigo, nombre):
     Consulta.agregarRegistro(consultaSql, valores)
         
         
-#esta funcion me devuelve todos los Profesion de la base de datos
+#esta funcion me devuelve todos los Profesion de la base de datos 
 def obtenerProfesiones():
     consultaSql = "SELECT * FROM Proyecto.Profesiones;"
     return Consulta.obtenerRegistros(consultaSql)
@@ -26,7 +26,7 @@ def obtenerProfesion(codigo):
 #Funcion para modificar un Profesion
 def modificarProfesion(codigo, nombre):
     consultaSql = ("UPDATE Proyecto.Profesiones "
-            "SET Profesion.nombre = %s "
+            "SET Profesiones.nombre = %s "
             "WHERE codigo = %s;")#hace referencia a que son parametros
     valores = (nombre, codigo) #los valores tienen que estar en una tupla
     Consulta.modificarRegistro(consultaSql, valores)   

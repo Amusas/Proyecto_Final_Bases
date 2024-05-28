@@ -4,368 +4,392 @@
 
 
 from pathlib import Path
-
+import sys
 # from tkinter import *
 # Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, END
 
+sys.path.append("./Controller")
+import Cargo_Controller as cc
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\LENOVO\Jeremias\Universidad\6_Semestre\BasesDatos\proyectoFinal\Proyecto_Final_Bases\Frontend\build\assets\frame5")
+ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame5")
 
+def registrarCargo(codigo, nombre, salario, funciones):
+    cc.registrarCargo(codigo, nombre, salario, funciones)
+
+def buscarCargo(codigo, nombre, salario, funciones):
+    cargo=cc.buscarCargo(codigo)
+    nombre.delete(0,END)    
+    salario.delete(0,END)
+    funciones.delete(0,END)
+
+    nombre.insert(0, cargo[0][1])
+    salario.insert(0, cargo[0][2])
+    funciones.insert(0, cargo[0][3])
+
+
+def actualizarCargo(codigo, nombre, salario, funciones):
+    cc.actualizarCargo(codigo, nombre, salario, funciones)
+
+def eliminarCargo(codigo):
+    cc.eliminarCargo(codigo)
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+def iniciar():
+    window = Tk()
 
-window = Tk()
-
-window.geometry("977x561")
-window.configure(bg = "#FFFFFF")
+    window.geometry("977x561")
+    window.configure(bg = "#FFFFFF")
 
 
-canvas = Canvas(
-    window,
-    bg = "#FFFFFF",
-    height = 561,
-    width = 977,
-    bd = 0,
-    highlightthickness = 0,
-    relief = "ridge"
-)
+    canvas = Canvas(
+        window,
+        bg = "#FFFFFF",
+        height = 561,
+        width = 977,
+        bd = 0,
+        highlightthickness = 0,
+        relief = "ridge"
+    )
 
-canvas.place(x = 0, y = 0)
-canvas.create_rectangle(
-    -2.442500114440918,
-    56.177495002746355,
-    977.0,
-    58.6199951171875,
-    fill="#BCF3DC",
-    outline="")
+    canvas.place(x = 0, y = 0)
+    canvas.create_rectangle(
+        -2.442500114440918,
+        56.177495002746355,
+        977.0,
+        58.6199951171875,
+        fill="#BCF3DC",
+        outline="")
 
-canvas.create_rectangle(
-    0.0,
-    58.0,
-    977.0,
-    562.0,
-    fill="#BCF3DC",
-    outline="")
+    canvas.create_rectangle(
+        0.0,
+        58.0,
+        977.0,
+        562.0,
+        fill="#BCF3DC",
+        outline="")
 
-button_image_1 = PhotoImage(
-    file=relative_to_assets("button_1.png"))
-btnHome = Button(
-    image=button_image_1,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat"
-)
-btnHome.place(
-    x=70.83251953125,
-    y=0.0,
-    width=68.38999938964844,
-    height=58.619998931884766
-)
+    button_image_1 = PhotoImage(
+        file=relative_to_assets("button_1.png"))
+    btnHome = Button(
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    btnHome.place(
+        x=70.83251953125,
+        y=0.0,
+        width=68.38999938964844,
+        height=58.619998931884766
+    )
 
-button_image_2 = PhotoImage(
-    file=relative_to_assets("button_2.png"))
-btnAtras = Button(
-    image=button_image_2,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_2 clicked"),
-    relief="flat"
-)
-btnAtras.place(
-    x=0.0,
-    y=0.0,
-    width=69.0,
-    height=58.619998931884766
-)
+    button_image_2 = PhotoImage(
+        file=relative_to_assets("button_2.png"))
+    btnAtras = Button(
+        image=button_image_2,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_2 clicked"),
+        relief="flat"
+    )
+    btnAtras.place(
+        x=0.0,
+        y=0.0,
+        width=69.0,
+        height=58.619998931884766
+    )
 
-canvas.create_rectangle(
-    34.195068359375,
-    92.81494140625,
-    928.1500854492188,
-    503.1549377441406,
-    fill="#6CD4A8",
-    outline="")
+    canvas.create_rectangle(
+        34.195068359375,
+        92.81494140625,
+        928.1500854492188,
+        503.1549377441406,
+        fill="#6CD4A8",
+        outline="")
 
-canvas.create_text(
-    105.027587890625,
-    312.6400146484375,
-    anchor="nw",
-    text="Funciones\nasignadas:",
-    fill="#FFFFFF",
-    font=("MontserratAlternates Bold", 24 * -1)
-)
+    canvas.create_text(
+        105.027587890625,
+        312.6400146484375,
+        anchor="nw",
+        text="Funciones\nasignadas:",
+        fill="#FFFFFF",
+        font=("MontserratAlternates Bold", 24 * -1)
+    )
 
-entry_image_1 = PhotoImage(
-    file=relative_to_assets("entry_1.png"))
-entry_bg_1 = canvas.create_image(
-    501.9336853027344,
-    388.35750579833984,
-    image=entry_image_1
-)
-entry_1 = Text(
-    bd=0,
-    bg="#73F7C0",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_1.place(
-    x=337.06494140625,
-    y=307.7550048828125,
-    width=329.73748779296875,
-    height=159.2050018310547
-)
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        501.9336853027344,
+        388.35750579833984,
+        image=entry_image_1
+    )
+    funcionesAsignadas = Text(
+        bd=0,
+        bg="#73F7C0",
+        fg="#000716",
+        highlightthickness=0
+    )
+    funcionesAsignadas.place(
+        x=337.06494140625,
+        y=307.7550048828125,
+        width=329.73748779296875,
+        height=159.2050018310547
+    )
 
-canvas.create_text(
-    105.027587890625,
-    119.6824951171875,
-    anchor="nw",
-    text="Código:",
-    fill="#FFFFFF",
-    font=("MontserratAlternates Bold", 24 * -1)
-)
+    canvas.create_text(
+        105.027587890625,
+        119.6824951171875,
+        anchor="nw",
+        text="Código:",
+        fill="#FFFFFF",
+        font=("MontserratAlternates Bold", 24 * -1)
+    )
 
-entry_image_2 = PhotoImage(
-    file=relative_to_assets("entry_2.png"))
-entry_bg_2 = canvas.create_image(
-    501.9336853027344,
-    134.33748054504395,
-    image=entry_image_2
-)
-entry_2 = Entry(
-    bd=0,
-    bg="#73F7C0",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_2.place(
-    x=337.06494140625,
-    y=112.35498046875,
-    width=329.73748779296875,
-    height=41.96500015258789
-)
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        501.9336853027344,
+        134.33748054504395,
+        image=entry_image_2
+    )
+    codigo = Entry(
+        bd=0,
+        bg="#73F7C0",
+        fg="#000716",
+        highlightthickness=0
+    )
+    codigo.place(
+        x=337.06494140625,
+        y=112.35498046875,
+        width=329.73748779296875,
+        height=41.96500015258789
+    )
 
-canvas.create_text(
-    105.027587890625,
-    175.8599853515625,
-    anchor="nw",
-    text="Nombre:",
-    fill="#FFFFFF",
-    font=("MontserratAlternates Bold", 24 * -1)
-)
+    canvas.create_text(
+        105.027587890625,
+        175.8599853515625,
+        anchor="nw",
+        text="Nombre:",
+        fill="#FFFFFF",
+        font=("MontserratAlternates Bold", 24 * -1)
+    )
 
-canvas.create_text(
-    105.027587890625,
-    249.135009765625,
-    anchor="nw",
-    text="Salario:",
-    fill="#FFFFFF",
-    font=("MontserratAlternates Bold", 24 * -1)
-)
+    canvas.create_text(
+        105.027587890625,
+        249.135009765625,
+        anchor="nw",
+        text="Salario:",
+        fill="#FFFFFF",
+        font=("MontserratAlternates Bold", 24 * -1)
+    )
 
-entry_image_3 = PhotoImage(
-    file=relative_to_assets("entry_3.png"))
-entry_bg_3 = canvas.create_image(
-    501.9336853027344,
-    267.45375061035156,
-    image=entry_image_3
-)
-entry_3 = Entry(
-    bd=0,
-    bg="#73F7C0",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_3.place(
-    x=337.06494140625,
-    y=244.25,
-    width=329.73748779296875,
-    height=44.407501220703125
-)
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        501.9336853027344,
+        267.45375061035156,
+        image=entry_image_3
+    )
+    salario = Entry(
+        bd=0,
+        bg="#73F7C0",
+        fg="#000716",
+        highlightthickness=0
+    )
+    salario.place(
+        x=337.06494140625,
+        y=244.25,
+        width=329.73748779296875,
+        height=44.407501220703125
+    )
 
-entry_image_4 = PhotoImage(
-    file=relative_to_assets("entry_4.png"))
-entry_bg_4 = canvas.create_image(
-    501.9336853027344,
-    201.50624084472656,
-    image=entry_image_4
-)
-entry_4 = Entry(
-    bd=0,
-    bg="#73F7C0",
-    fg="#000716",
-    highlightthickness=0
-)
-entry_4.place(
-    x=337.06494140625,
-    y=178.302490234375,
-    width=329.73748779296875,
-    height=44.407501220703125
-)
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        501.9336853027344,
+        201.50624084472656,
+        image=entry_image_4
+    )
+    nombre = Entry(
+        bd=0,
+        bg="#73F7C0",
+        fg="#000716",
+        highlightthickness=0
+    )
+    nombre.place(
+        x=337.06494140625,
+        y=178.302490234375,
+        width=329.73748779296875,
+        height=44.407501220703125
+    )
 
-button_image_3 = PhotoImage(
-    file=relative_to_assets("button_3.png"))
-btnEliminar = Button(
-    image=button_image_3,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_3 clicked"),
-    relief="flat"
-)
-btnEliminar.place(
-    x=718.0,
-    y=371.0,
-    width=176.1521759033203,
-    height=41.21741485595703
-)
+    button_image_3 = PhotoImage(
+        file=relative_to_assets("button_3.png"))
+    btnEliminar = Button(
+        image=button_image_3,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: eliminarCargo(codigo.get()),
+        relief="flat"
+    )
+    btnEliminar.place(
+        x=718.0,
+        y=371.0,
+        width=176.1521759033203,
+        height=41.21741485595703
+    )
 
-button_image_4 = PhotoImage(
-    file=relative_to_assets("button_4.png"))
-btnActualizar = Button(
-    image=button_image_4,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_4 clicked"),
-    relief="flat"
-)
+    button_image_4 = PhotoImage(
+        file=relative_to_assets("button_4.png"))
+    btnActualizar = Button(
+        image=button_image_4,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: actualizarCargo(codigo.get(), nombre.get(), int(salario.get()), funcionesAsignadas.get()),
+        relief="flat"
+    )
 
-btnActualizar.place(
-    x=718.0,
-    y=308.0,
-    width=176.1521759033203,
-    height=41.47827911376953
-)
+    btnActualizar.place(
+        x=718.0,
+        y=308.0,
+        width=176.1521759033203,
+        height=41.47827911376953
+    )
 
-button_image_5 = PhotoImage(
-    file=relative_to_assets("button_5.png"))
-btnBuscar = Button(
-    image=button_image_5,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_5 clicked"),
-    relief="flat"
-)
-btnBuscar.place(
-    x=718.0,
-    y=182.978271484375,
-    width=176.1521759033203,
-    height=41.02173614501953
-)
+    button_image_5 = PhotoImage(
+        file=relative_to_assets("button_5.png"))
+    btnBuscar = Button(
+        image=button_image_5,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: buscarCargo(codigo.get(), nombre, salario, funcionesAsignadas),
+        relief="flat"
+    )
+    btnBuscar.place(
+        x=718.0,
+        y=182.978271484375,
+        width=176.1521759033203,
+        height=41.02173614501953
+    )
 
-button_image_6 = PhotoImage(
-    file=relative_to_assets("button_6.png"))
-btnAgregar = Button(
-    image=button_image_6,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_6 clicked"),
-    relief="flat"
-)
-btnAgregar.place(
-    x=720.0,
-    y=245.7174072265625,
-    width=176.5652618408203,
-    height=41.2825927734375
-)
+    button_image_6 = PhotoImage(
+        file=relative_to_assets("button_6.png"))
+    btnAgregar = Button(
+        image=button_image_6,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: registrarCargo(codigo.get(), nombre.get(), int(salario.get()), funcionesAsignadas.get()),
+        relief="flat"
+    )
 
-button_image_7 = PhotoImage(
-    file=relative_to_assets("button_7.png"))
-btnDepartamento = Button(
-    image=button_image_7,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_7 clicked"),
-    relief="flat"
-)
-btnDepartamento.place(
-    x=263.0,
-    y=5.0,
-    width=166.0,
-    height=63.0
-)
+    btnAgregar.place(
+        x=720.0,
+        y=245.7174072265625,
+        width=176.5652618408203,
+        height=41.2825927734375
+    )
 
-button_image_8 = PhotoImage(
-    file=relative_to_assets("button_8.png"))
-btnMunicipio = Button(
-    image=button_image_8,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_8 clicked"),
-    relief="flat"
-)
-btnMunicipio.place(
-    x=430.0,
-    y=5.0,
-    width=117.0,
-    height=63.0
-)
+    button_image_7 = PhotoImage(
+        file=relative_to_assets("button_7.png"))
+    btnDepartamento = Button(
+        image=button_image_7,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_7 clicked"),
+        relief="flat"
+    )
+    btnDepartamento.place(
+        x=263.0,
+        y=5.0,
+        width=166.0,
+        height=63.0
+    )
 
-button_image_9 = PhotoImage(
-    file=relative_to_assets("button_9.png"))
-btnSucursales = Button(
-    image=button_image_9,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_9 clicked"),
-    relief="flat"
-)
-btnSucursales.place(
-    x=548.0,
-    y=5.0,
-    width=114.0,
-    height=63.0
-)
+    button_image_8 = PhotoImage(
+        file=relative_to_assets("button_8.png"))
+    btnMunicipio = Button(
+        image=button_image_8,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_8 clicked"),
+        relief="flat"
+    )
+    btnMunicipio.place(
+        x=430.0,
+        y=5.0,
+        width=117.0,
+        height=63.0
+    )
 
-button_image_10 = PhotoImage(
-    file=relative_to_assets("button_10.png"))
-btnProfesiones = Button(
-    image=button_image_10,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_10 clicked"),
-    relief="flat"
-)
-btnProfesiones.place(
-    x=737.0,
-    y=5.0,
-    width=118.0,
-    height=63.0
-)
+    button_image_9 = PhotoImage(
+        file=relative_to_assets("button_9.png"))
+    btnSucursales = Button(
+        image=button_image_9,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_9 clicked"),
+        relief="flat"
+    )
+    btnSucursales.place(
+        x=548.0,
+        y=5.0,
+        width=114.0,
+        height=63.0
+    )
 
-button_image_11 = PhotoImage(
-    file=relative_to_assets("button_11.png"))
-btnEmpleados = Button(
-    image=button_image_11,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_11 clicked"),
-    relief="flat"
-)
-btnEmpleados.place(
-    x=856.0,
-    y=5.0,
-    width=121.0,
-    height=63.0
-)
+    button_image_10 = PhotoImage(
+        file=relative_to_assets("button_10.png"))
+    btnProfesiones = Button(
+        image=button_image_10,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_10 clicked"),
+        relief="flat"
+    )
+    btnProfesiones.place(
+        x=737.0,
+        y=5.0,
+        width=118.0,
+        height=63.0
+    )
 
-button_image_12 = PhotoImage(
-    file=relative_to_assets("button_12.png"))
-btnCargos = Button(
-    image=button_image_12,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_12 clicked"),
-    relief="flat"
-)
-btnCargos.place(
-    x=663.0,
-    y=5.0,
-    width=73.0,
-    height=63.0
-)
-window.resizable(False, False)
-window.mainloop()
+    button_image_11 = PhotoImage(
+        file=relative_to_assets("button_11.png"))
+    btnEmpleados = Button(
+        image=button_image_11,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_11 clicked"),
+        relief="flat"
+    )
+    btnEmpleados.place(
+        x=856.0,
+        y=5.0,
+        width=121.0,
+        height=63.0
+    )
+
+    button_image_12 = PhotoImage(
+        file=relative_to_assets("button_12.png"))
+    btnCargos = Button(
+        image=button_image_12,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_12 clicked"),
+        relief="flat"
+    )
+    btnCargos.place(
+        x=663.0,
+        y=5.0,
+        width=73.0,
+        height=63.0
+    )
+    window.resizable(False, False)
+    window.mainloop()
+
+iniciar()

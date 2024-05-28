@@ -6,6 +6,7 @@ import Sesion
 #se instalan ambas
 import customtkinter as ctk
 import tkinter
+import build.menu as menu
 
 #quita el mensaje del label error
 def eliminar_error():
@@ -13,8 +14,11 @@ def eliminar_error():
 
   
 def cerrar():
-    lc.cerrarSesion()
-    app.destroy()
+    try:
+        lc.cerrarSesion()
+        app.destroy()
+    except:
+        app.destroy()   
 
 
 #eventos de botones y funciones
@@ -36,12 +40,12 @@ def iniciar_sesion():
         labelError.place(x=100,y=290)  
         app.after(1500, eliminar_error)
     if codigoEstado == 1:
-        print("inicio_sesion")
-        
-
+        app.destroy()
+        menu.iniciar()
+            
 
 #Creacion de la ventana principal
-ctk.set_appearance_mode("dark")
+ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
 
 app = ctk.CTk()
